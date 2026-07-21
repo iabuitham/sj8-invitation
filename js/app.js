@@ -1,30 +1,39 @@
-
 const params = new URLSearchParams(window.location.search);
 
-const guest = params.get("name");
+const inviteID = params.get("id");
 
 
-if(guest){
+const guests = {
+
+"SJ8-0001":{
+name:"Ahmad Khaled"
+},
+
+"SJ8-0002":{
+name:"Sara Ali"
+},
+
+"SJ8-0003":{
+name:"Omar Nasser"
+}
+
+
+};
+
+
+if(guests[inviteID]){
 
 document.getElementById("inviteName").innerHTML =
-guest + ", you are invited";
+guests[inviteID].name + ", you are invited";
 
-document.getElementById("name").value = guest;
+document.getElementById("name").value =
+guests[inviteID].name;
+
 
 }
+else{
 
-
-
-function acceptInvite(){
-
-document.getElementById("formBox").style.display="block";
-
-}
-
-
-
-function declineInvite(){
-
-window.location.href="decline.html";
+document.getElementById("inviteName").innerHTML =
+"Invalid Invitation";
 
 }
