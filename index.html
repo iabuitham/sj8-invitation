@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Summer Jam 8 Invitation</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <img src="assets/banner.png" class="banner" />
+
+      <h1>Summer Jam 8</h1>
+
+      <h2 id="inviteName">You are invited</h2>
+
+      <p>The Warrior Experience awaits you.</p>
+
+      <div class="buttons">
+        <button onclick="acceptInvite()">Accept Invitation</button>
+
+        <button onclick="declineInvite()">Decline</button>
+      </div>
+
+      <div id="formBox" style="display: none">
+        <form
+          name="summer-jam-rsvp"
+          method="POST"
+          data-netlify="true"
+          action="/success.html"
+        >
+          <input type="hidden" name="form-name" value="summer-jam-rsvp" />
+
+          <label> Name </label>
+
+          <input id="name" name="name" required />
+
+          <label> Email </label>
+
+          <input type="email" name="email" required />
+
+          <label> Location </label>
+
+          <input
+            name="location"
+            required
+            placeholder="Where should we deliver your invitation?"
+          />
+
+          <button type="submit">Confirm Attendance</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
