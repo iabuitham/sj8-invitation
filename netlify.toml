@@ -1,0 +1,19 @@
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Invitations are served from the root with a ?id= query string, e.g.
+# https://summerjaminvite.netlify.app/?id=8F3K92 — no redirect rules are
+# needed since the query string is read client-side from index.html.

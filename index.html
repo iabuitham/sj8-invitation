@@ -1,57 +1,199 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Summer Jam 8 Invitation</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Summer Jam 8 — The Warrior | You're Invited</title>
+<meta name="description" content="You've been invited to Summer Jam 8: The Warrior. An exclusive luxury festival experience. Accept your invitation before the gates close.">
 
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
+<!-- Theme -->
+<meta name="theme-color" content="#0a0806">
+<meta name="color-scheme" content="dark">
 
-  <body>
-    <div class="container">
-      <img src="assets/banner.png" class="banner" />
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="assets/logo.jpg">
+<link rel="apple-touch-icon" href="assets/logo.jpg">
 
-      <h1>Summer Jam 8</h1>
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Summer Jam 8 — The Warrior">
+<meta property="og:description" content="You've been invited to Summer Jam 8: The Warrior. An exclusive luxury festival experience.">
+<meta property="og:image" content="assets/hero.jpeg">
+<meta property="og:site_name" content="Summer Jam 8">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Summer Jam 8 — The Warrior">
+<meta name="twitter:description" content="You've been invited to Summer Jam 8: The Warrior.">
+<meta name="twitter:image" content="assets/hero.jpeg">
 
-      <h2 id="inviteName">You are invited</h2>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-      <p>The Warrior Experience awaits you.</p>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-      <div class="buttons">
-        <button onclick="acceptInvite()">Accept Invitation</button>
+<div class="texture-overlay" aria-hidden="true"></div>
+<canvas id="ember-canvas" aria-hidden="true"></canvas>
 
-        <button onclick="declineInvite()">Decline</button>
-      </div>
+<div class="app">
 
-      <div id="formBox" style="display: none">
-        <form
-          name="summer-jam-rsvp"
-          method="POST"
-          data-netlify="true"
-          action="/success.html"
-        >
-          <input type="hidden" name="form-name" value="summer-jam-rsvp" />
+  <!-- ===================== HERO ===================== -->
+  <header class="hero" id="hero">
+    <div class="hero__bg" id="heroBg" aria-hidden="true"></div>
+    <div class="hero__overlay" aria-hidden="true"></div>
 
-          <label> Name </label>
-
-          <input id="name" name="name" required />
-
-          <label> Email </label>
-
-          <input type="email" name="email" required />
-
-          <label> Location </label>
-
-          <input
-            name="location"
-            required
-            placeholder="Where should we deliver your invitation?"
-          />
-
-          <button type="submit">Confirm Attendance</button>
-        </form>
-      </div>
+    <div class="hero__content">
+      <img class="hero__logo" src="assets/logo.png" alt="Summer Jam 8 sigil" width="84" height="84">
+      <p class="hero__eyebrow">Beats Events Presents</p>
+      <h1 class="hero__title">YOU'RE&nbsp;INVITED</h1>
+      <p class="hero__subtitle">SUMMER JAM 8 <span class="hero__theme">— THE WARRIOR</span></p>
+      <p class="hero__invitee" id="heroInvitee" aria-live="polite"></p>
     </div>
 
-    <script src="js/app.js"></script>
-  </body>
+    <div class="hero__scroll" aria-hidden="true"></div>
+  </header>
+
+  <!-- ===================== MAIN STAGE ===================== -->
+  <main id="main" class="stage">
+    <div class="container">
+      <section class="card" id="card" aria-live="polite">
+
+        <!-- Loading state -->
+        <div class="panel is-active" id="panelLoading">
+          <p class="panel__lede">Verifying your invitation…</p>
+        </div>
+
+        <!-- Invalid invitation -->
+        <div class="panel" id="panelInvalid">
+          <div class="invalid-state">
+            <p class="invalid-state__code" aria-hidden="true">✕</p>
+            <h2 class="panel__heading">Invitation not found.</h2>
+            <p class="panel__lede">This link doesn't match a record in the warrior's ledger. Double-check the link you were sent, or reach out to whoever invited you.</p>
+          </div>
+        </div>
+
+        <!-- Welcome / decision -->
+        <div class="panel" id="panelWelcome">
+          <h2 class="panel__heading">Hello, <span id="inviteeName">Friend</span></h2>
+          <p class="panel__lede">You've been invited to <strong>Summer Jam 8: The Warrior</strong>. Answer the call before the gates seal.</p>
+
+          <div class="action-row">
+            <button type="button" class="btn btn--primary" id="btnAccept" aria-describedby="inviteeName">
+              Accept Invitation
+            </button>
+            <button type="button" class="btn btn--ghost" id="btnDecline">
+              Decline Invitation
+            </button>
+          </div>
+        </div>
+
+        <!-- Decline confirmation -->
+        <div class="panel" id="panelDecline">
+          <svg class="illustration" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+            <circle cx="48" cy="48" r="44" stroke="#d4af37" stroke-width="2" opacity="0.5"/>
+            <path d="M48 26 L48 54" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="48" cy="66" r="2.6" fill="#d4af37"/>
+          </svg>
+          <h2 class="panel__heading">We're sad you won't be joining us this year.</h2>
+          <p class="panel__lede">We hope to see you at a future Summer Jam.</p>
+        </div>
+
+        <!-- Accept form -->
+        <div class="panel" id="panelForm">
+          <h2 class="panel__heading">Confirm Your Place</h2>
+          <p class="panel__lede">A few details, warrior, and your seat by the fire is secured.</p>
+
+          <form
+            name="summerjam-invitations"
+            method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            netlify
+            id="inviteForm"
+            action="/thank-you.html"
+            novalidate>
+
+            <input type="hidden" name="form-name" value="summerjam-invitations">
+
+            <!-- honeypot -->
+            <p class="is-hidden" aria-hidden="true">
+              <label>Don't fill this out if you're human: <input name="bot-field"></label>
+            </p>
+
+            <!-- hidden context fields -->
+            <input type="hidden" name="invite_id" id="inviteId" value="">
+            <input type="hidden" name="response" value="accepted">
+
+            <div class="form-group">
+              <label class="form-label" for="fieldName">Name</label>
+              <input class="form-control" type="text" name="name" id="fieldName" readonly required>
+            </div>
+
+            <div class="form-group" id="groupEmail">
+              <label class="form-label" for="fieldEmail">Email</label>
+              <input class="form-control" type="email" name="email" id="fieldEmail" required
+                     aria-describedby="errorEmail" autocomplete="email">
+              <p class="form-error" id="errorEmail">Enter a valid email address.</p>
+            </div>
+
+            <div class="form-group" id="groupLocation">
+              <label class="form-label" for="fieldLocation">Location</label>
+              <textarea class="form-control" name="location" id="fieldLocation" required
+                        aria-describedby="errorLocation" placeholder="City, state / country"></textarea>
+              <p class="form-error" id="errorLocation">Tell us where you're traveling from.</p>
+            </div>
+
+            <div class="action-row">
+              <button type="submit" class="btn btn--primary" id="btnSubmit">
+                <span id="btnSubmitLabel">Confirm Invitation</span>
+              </button>
+              <button type="button" class="btn btn--ghost" id="btnBackToWelcome">
+                Back
+              </button>
+            </div>
+
+            <p class="form-status" id="formStatus" role="status"></p>
+            <p class="form-note">Your details are only used to prepare your physical invitation and event credentials.</p>
+          </form>
+        </div>
+
+        <!-- Success -->
+        <div class="panel" id="panelSuccess">
+          <div class="seal">
+            <img src="assets/logo.jpg" alt="" aria-hidden="true">
+          </div>
+          <h2 class="panel__heading">Thank you.</h2>
+          <p class="panel__lede">Your invitation has been confirmed. Our team will contact you shortly regarding your physical invitation.</p>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <p class="site-footer__brand">BEATS EVENTS</p>
+    <nav class="social-icons" aria-label="Social media">
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2 .24 2.7.52.7.28 1.3.65 1.9 1.25.6.6.97 1.2 1.25 1.9.28.7.46 1.5.52 2.7.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.24 2-.52 2.7a5.1 5.1 0 01-1.25 1.9 5.1 5.1 0 01-1.9 1.25c-.7.28-1.5.46-2.7.52-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-2-.24-2.7-.52a5.1 5.1 0 01-1.9-1.25 5.1 5.1 0 01-1.25-1.9c-.28-.7-.46-1.5-.52-2.7C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.24-2 .52-2.7.28-.7.65-1.3 1.25-1.9a5.1 5.1 0 011.9-1.25c.7-.28 1.5-.46 2.7-.52C8.4 2.2 8.8 2.2 12 2.2zm0 3.05a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zm0 11.13a4.38 4.38 0 110-8.76 4.38 4.38 0 010 8.76zm7.02-11.4a1.58 1.58 0 11-3.15 0 1.58 1.58 0 013.15 0z"/></svg>
+      </a>
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
+        <svg viewBox="0 0 24 24"><path d="M18.9 3H22l-7.6 8.7L23.3 21h-6.9l-5.4-6.6L4.7 21H1.6l8.2-9.3L1 3h7.1l4.9 6.1L18.9 3zm-1.2 16h1.9L7.4 5H5.3l12.4 14z"/></svg>
+      </a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <svg viewBox="0 0 24 24"><path d="M14.5 2h3.1c.2 1.6 1.2 3 2.6 3.8 1 .6 2.1.9 3.3 1v3.2c-1.9 0-3.6-.6-5.1-1.6v7.1c0 3.6-2.9 6.5-6.5 6.5S5.4 19.1 5.4 15.5c0-3.4 2.6-6.2 5.9-6.5v3.3a3.2 3.2 0 00-1 6.2 3.2 3.2 0 004.4-3v-13.5z"/></svg>
+      </a>
+    </nav>
+    <p>&copy; <span id="year"></span> Beats Events. All rights reserved.</p>
+  </footer>
+
+</div>
+
+<canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+<script src="script.js" defer></script>
+</body>
 </html>
