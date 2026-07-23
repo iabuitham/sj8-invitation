@@ -238,8 +238,10 @@
     try {
       const response = await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encodeFormData(els.form)
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams(new FormData(els.form)).toString()
       });
 
       if (!response.ok) {
