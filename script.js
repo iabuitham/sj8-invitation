@@ -162,7 +162,7 @@ const invitees = {
       if (!raw) return null;
       // Sanitize: keep only alphanumeric characters, cap length to guard
       // against injection or oversized query values.
-      const clean = raw.replace(/[^a-zA-Z0-9]/g, '').slice(0, 20);
+      const clean = raw.replace(/[^a-zA-Z0-9-]/g, '').slice(0, 20);      
       return clean.length ? clean.toUpperCase() : null;
     } catch (err) {
       console.error('getInviteID failed:', err);
