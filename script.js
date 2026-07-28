@@ -96,7 +96,8 @@ const invitees = {
   'SJ26-NLT492': { name: 'Mohammad Al-taani' },
   'SJ26-NTN127': { name: 'Saeed Qaffaf' },
   'SJ26-NXC462': { name:  'SJ8 Team' },
-  'SJ26-NYX644': { name:  'Jalal Halaweh' }
+  'SJ26-NYX644': { name:  'Jalal Halaweh' },
+  'SJ26-NXC462': { name: 'Jacoub Al Basha'}
 };
 
   /* ------------------------------------------------------------------- *
