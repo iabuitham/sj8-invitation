@@ -96,7 +96,22 @@ const invitees = {
   'SJ26-NLT492': { name: 'Mohammad Al-taani' },
   'SJ26-NTN127': { name: 'Saeed Qaffaf' },
   'SJ26-NYX644': { name:  'Jalal Halaweh' },
-  'SJ26-NXC462': { name: 'Jacoub Al Basha'}
+  'SJ26-NYX644': { name: 'Zaid Qaffaf' },
+'SJ26-OHO149': { name: 'Dana Haddad' },
+'SJ26-ONO816': { name: 'Zaid Karadsheh' },
+'SJ26-OPA143': { name: 'Malak Hussein' },
+'SJ26-OQY253': { name: 'Shemaa Khalill' },
+'SJ26-PEM727': { name: 'Rihab El Malt' },
+'SJ26-PJW747': { name: 'Alaa Njjar' },
+'SJ26-PWJ218': { name: 'Manar Shaath' },
+'SJ26-PXA943': { name: 'AHMAD ASHA' },
+'SJ26-PZW856': { name: 'Rasha Sameer' },
+'SJ26-QGF504': { name: 'Mohammad Deeb' },
+'SJ26-QHB783': { name: 'Jordan Create' },
+'SJ26-QHP513': { name: 'Zaid Tannous' },
+'SJ26-QIG230': { name: 'Sally AlSemaan' },
+'SJ26-QRB674': { name: 'Fatima K' },
+'SJ26-QSP501': { name: 'Mohanadsyoof' },
 };
 
   /* ------------------------------------------------------------------- *
