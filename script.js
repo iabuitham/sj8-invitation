@@ -127,7 +127,8 @@ const invitees = {
 'SJ26-TMV986': { name: 'Hamze Khashman' },
 'SJ26-TPP234': { name: 'Nour Aldeen Zamil' },
 'SJ26-TSJ381': { name: 'Fadi Mansour' },
-'SJ26-UBK208': { name: 'Jawad Twal' }
+'SJ26-UBK208': { name: 'Jawad Twal' },
+'SJ26-UDK631': { name: 'شهد أيمن'},
 };
 
   /* ------------------------------------------------------------------- *
